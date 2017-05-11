@@ -15,6 +15,12 @@ for (var i = 0; i < questions.length; i++) {
 	closeQuestions.push(q);
 }
 
+// The above totally works, but I just wanted to show you another way to generate the closeQuestions array using the `.map` method on arrays
+
+// var closeQuestions = questions.map(function (question) {
+// 	return (new flashCards.ClozeCard(question.full, question.cloze))
+// })
+
 // What question the user is currently on
 var currentQuestion = 0;
 // How many questions the user has gotten right
@@ -24,25 +30,27 @@ var wrong = 0;
 
 
 var start = function (){
-inquirer.prompt([
-  {
-    type: "list",
-    message: "What do you want to do?",
-    choices: ["FlashCards", "Take Trivia Test"],
-    name: "action"
-  },
-    
+	// consistent indentation is really useful for parsing through your code
+	// and understanding which blocks are contained within other blocks.
+	inquirer.prompt([
+	  {
+	    type: "list",
+	    message: "What do you want to do?",
+	    choices: ["FlashCards", "Take Trivia Test"],
+	    name: "action"
+	  },
+	    
 
-]).then(function(user) {
-	if (user.action == "FlashCards") {
-		// Begin asking the review!
-		review();
-		start();
-	}else{
-		// Begin asking the questions!
-		askQuestion();
-	}
-});
+	]).then(function(user) {
+		if (user.action == "FlashCards") {
+			// Begin asking the review!
+			review();
+			start();
+		}else{
+			// Begin asking the questions!
+			askQuestion();
+		}
+	});
 }
 
 function review(){
